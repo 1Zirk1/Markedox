@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="icon" href="https://cdn.glitch.com/9b6e3566-adf7-4fd4-a8ca-23a328fe259e%2Fcf68509b-ee90-468c-a0f4-a1cc76d1a663.image.png?v=1623245248638"
+	/>
+
+	<title>Markedox Shop</title>
+
+	<link rel="stylesheet" href="/shopstyles.css" />
+
+	<script src="/shopscript.js" defer>
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js">
+	</script>
+	<script src="https://unpkg.com/vue@next">
+	</script>
+</head>
+
+<body>
+	<div id="app">
+
+
+		<nav class="nav" style=" 
+  align-items: center;
+  background: yellowgreen;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;">
+			<h2 class="nav__header" style="font-size: 2.5rem;">Markedox Shop</h2>
+			<div class="nav__cart " style="position: relative;
+                                   padding:40px;">
+				<button @click="showCart = !showCart" style= "background: none;
+      border: 2;
+      color: white
+      
+      ;
+      ;">
+        <i class="fas fa-shopping-cart" style="font-size: 2rem;"></i>
+      </button>
+
+      <span class="total-quantity" style="
+      align-items: center;
+      background: grey;
+      border-radius: 50%;
+      display: flex;
+      font-weight: bold;
+      height: 2rem;
+      justify-content: center;
+      padding: 0.5rem;
+      position: absolute;
+      right: -10px;
+      top: 30px;
+      width: 2rem;">{{ totalQuantity }}
+      </span>
+      
+      <div v-if="showCart" class="cart-dropdown">
+        <ul class="cart-dropdown__list" style="
+      text-align: right;
+      background: white;
+      border: 1px solid lightgray;
+      border-radius: 10px;
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+      color: #333;
+      font-size: 1.3rem;
+      overflow: auto;
+      padding: 0 1rem;
+      position: absolute;
+      right: 0;
+      width: 12rem;
+      list-style: none;">
+          
+          <li
+            v-for="product in cart"
+            :key="product.id"
+            style="margin: 1rem 0;"  
+          >
+            {{ product.name }} ({{ product.quantity }})
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+ 
+      			<div class="col">
+				<ul id="sub">
+					<li><a href="index.html">Homepage</a>
+					</li>
+				</ul>
+			</div>
+  <section class="products" style="
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;">
+    
+    <div v-for="product in products" :key="product.id" class="product" style=
+    "
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin: 2rem;
+    padding: 1rem; ">
+      <h3 class="product__header">{{ product.name }}</h3>
+      <img class="thumbnail" :src="product.thumbnail" width="170" height="170" 
+      style=
+      "display: block;
+      margin: 1rem auto;
+       
+      ">
+      
+      <p class="product__description" style=
+      "font-size: 1.3rem;
+      margin-top: 1rem;
+       
+      ">
+        
+      {{ product.description }}</p>
+      <div class="cart" style="
+      margin-top: 2rem;
+     text-align: center;
+                               
+      ">
+        <button
+          @click="updateCart(product, 'subtract')"
+          class="cart__button" style=" background: grey;
+    border: 0;
+    color: white;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: bold;
+    height: 2.5rem;
+    width: 2.5rem;"
+        >
+          -
+        </button>
+        <span class="cart__quantity" style=
+        "font-size: 1.5rem;
+         margin: 0 1rem;">
+      {{ product.quantity }}</span>
+        <button
+          @click="updateCart(product, 'add')"
+          class="cart__button" 
+    style=" background: grey;
+    border: 0;
+    color: white;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: bold;
+    height: 2.5rem;
+    width: 2.5rem;" 
+        >
+          +
+        </button>
+      </div>
+    </div>
+  </section>  
+  
+</div>
+  </body>
+</html>
